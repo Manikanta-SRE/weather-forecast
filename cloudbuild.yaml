@@ -1,25 +1,13 @@
 steps:
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['build', '-t', 'gcr.io/$PROJECT_ID/my-python-service', '.']
-  options:
-   logging:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '-t', 'gcr.io/my-project/my-python-app', '.']
+  dir: 'https://github.com/Manikanta-SRE/weather-forecast/blob/main/weather-forecast.py'
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push', 'gcr.io/helical-button-425403-t3/my-python-app']
+images:
+- 'gcr.io/helical-button-425403-t3/my-python-app'
+options:
+  logging:
     gcsLog:
       location: 'gs://cloud-build-logs-cicd'
-   serviceAccount: 210953134826@cloudbuild.gserviceaccount.com
-  - name: 'gcr.io/cloud-builders/docker'
-    args: ['push', 'gcr.io/$PROJECT_ID/my-python-service']
-  - name: 'gcr.io/google.com/cloudsdktool/gcloud'
-    args:
-      - 'run'
-      - 'deploy'
-      - 'my-python-service'
-      - '--image'
-      - 'gcr.io/$PROJECT_ID/my-python-service'
-      - '--platform'
-      - 'managed'
-      - '--region'
-      - 'us-central1'
-  #substitutions:
-    #GCP Specific configuration. Please DON'T change anything
-  #  _PROJECT: helical-button-425403-t3
-  #  _ZONE: us-central1-a
+serviceAccount: 210953134826@cloudbuild.gserviceaccount.com
