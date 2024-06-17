@@ -14,7 +14,7 @@ steps:
       - 'managed'
       - '--region'
       - 'us-central1'
-  substitutions:
+  #substitutions:
     #GCP Specific configuration. Please DON'T change anything
-    _PROJECT: helical-button-425403-t3
-    _ZONE: us-central1-a
+  #  _PROJECT: helical-button-425403-t3
+  #  _ZONE: us-central1-a
