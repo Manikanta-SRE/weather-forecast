@@ -1,8 +1,9 @@
+
 import requests
 
 
 def kelvin_to_celcius(kelvin):
-  return kevin - 273.15
+  return kelvin - 273.15
 
 def get_weather(city):
   api_key = "ef8842e274771f9052419ec6c963dcc0"
@@ -15,7 +16,7 @@ def get_weather(city):
     main = data["main"]
     temperature = main["temp"]
     temperature_celcius = kelvin_to_celcius(temperature)
-    humidity = main{"humidity"]
+    humidity = main["humidity"]
     weather_desc = data["weather"][0]=["description"]
     return temperature_celcius, humidity, weather_desc
 
