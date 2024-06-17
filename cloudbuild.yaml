@@ -1,20 +1,19 @@
 steps:
--name: 'gcr.io/cloud-builders/docker'
- args: ['build', '-t', 'gcr.io/$PROJECT_ID/my-service']
--name: 'gcr.io/cloud-builders/docker'
- args: ['push', 'gcr.io/$PROJECT_ID/my-service']
--name: 'gcr.io/google.com/cloudsdktool/gcloud'
- args:
-   -'run'
-   -'deploy'
-   -'my-service'
-   -'--image'
-   -'gcr.io/$PROJECT_ID/my-service'
-   -'--platform'
-   -'managed'
-   -'--region'
-   -'us-central1'
-
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/$PROJECT_ID/my-python-service', '.']
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/$PROJECT_ID/my-python-service']
+  - name: 'gcr.io/google.com/cloudsdktool/gcloud'
+    args:
+      - 'run'
+      - 'deploy'
+      - 'my-python-service'
+      - '--image'
+      - 'gcr.io/$PROJECT_ID/my-python-service'
+      - '--platform'
+      - 'managed'
+      - '--region'
+      - 'us-central1'
   substitutions:
     #GCP Specific configuration. Please DON'T change anything
     _PROJECT: helical-button-425403-t3
