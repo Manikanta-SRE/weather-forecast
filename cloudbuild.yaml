@@ -1,13 +1,7 @@
 steps:
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/my-project/my-python-app', '.']
-  dir: 'https://github.com/Manikanta-SRE/weather-forecast/blob/main/weather-forecast.py'
-- name: 'gcr.io/cloud-builders/docker'
-  args: ['push', 'gcr.io/helical-button-425403-t3/my-python-app']
-images:
-- 'gcr.io/helical-button-425403-t3/my-python-app'
-options:
-  logging:
-    gcsLog:
-      location: 'gs://cloud-build-logs-cicd'
-serviceAccount: 210953134826@cloudbuild.gserviceaccount.com
+  - name: 'gcr.io/cloudbuild/docker'
+    args: ['build', '-t', 'us-docker.pkg.dev/helical-button-425403-t3/cloudrun/my-python-app:latest', '.']
+  - name: 'gcr.io/cloudbuild/docker'
+    args: ['push', 'us-docker.pkg.dev/helical-button-425403-t3/cloudrun/my-python-app:latest']
+  - name: 'gcr.io/cloudbuild/cloudrun'
+    args: ['deploy', 'my-python-app', '--image', 'us-docker.pkg.dev/helical-button-425403-t3/cloudrun/my-python-app:latest', '--region', 'us-central1', '--platform', 'managed']
