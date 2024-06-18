@@ -1,17 +1,10 @@
-#Use the official Python Image
-FROM python:3.9-slim
+FROM python:3.9-slim  # Use a slim Python base image
 
-#set the working directory in the container
-WORKDIR/app
+WORKDIR /app
 
-#copy the pyhton dependencies file
-COPY requirements.txt
-
-#Install Python dependencies
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-#copy the Python script into the container 
-COPY your_weather_forecast_script.py
+COPY . .
 
-#command to run the Python script
-CMD ["python", "your_weather_forecast_script.py"]
+CMD ["python", "weather_app.py"]  # Replace "weather_app.py" with your script's name
